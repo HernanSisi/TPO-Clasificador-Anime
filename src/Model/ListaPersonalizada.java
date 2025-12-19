@@ -1,10 +1,12 @@
 package Model;
 
 import java.util.ArrayList;
-import java.io.Serializable;
+import java.io.Serializable; // Import necesario
 
-public class ListaPersonalizada {
+// AGREGAR "implements Serializable" AQUÍ
+public class ListaPersonalizada implements Serializable {
     private static final long serialVersionUID = 1L;
+
     private String nombre;
     private ArrayList<Anime> animes;
 
@@ -12,6 +14,7 @@ public class ListaPersonalizada {
         this.nombre = nombre;
         this.animes = new ArrayList<>();
     }
+    // ... resto de los métodos igual (getters, setters, add, remove) ...
     public void agregarAnime(Anime a){
         animes.add(a);
     }
@@ -30,11 +33,9 @@ public class ListaPersonalizada {
     public void removeAnime(int i){
         animes.remove(i);
     }
-
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

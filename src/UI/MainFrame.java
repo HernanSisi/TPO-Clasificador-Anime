@@ -40,7 +40,7 @@ public class MainFrame extends JFrame {
         // Inicializamos los otros servicios
         this.busqueda = new ServicioFiltro(this.servicioManagement);
         this.estadisticas = new ServicioEstadistica();
-        this.recomendacion = new ServicioRecomendacion(this.servicioManagement);
+        this.recomendacion = new ServicioRecomendacion();
     }
 
     private void inicializarComponentes() {
@@ -70,9 +70,8 @@ public class MainFrame extends JFrame {
         tabbedPane.addTab("Estadísticas", panelEstadisticas);
 
         // Pestaña 4: Recomendaciones
-        JPanel panelRecomendacion = new JPanel();
-        panelRecomendacion.add(new JLabel("Aquí aparecerían las recomendaciones generadas"));
-        tabbedPane.addTab("Recomendaciones", panelRecomendacion);
+        PanelListasPersonalizada panelListas = new PanelListasPersonalizada(servicioManagement,recomendacion);
+        tabbedPane.addTab("Listas Personalizadas", panelListas);
 
         add(tabbedPane, BorderLayout.CENTER);
     }

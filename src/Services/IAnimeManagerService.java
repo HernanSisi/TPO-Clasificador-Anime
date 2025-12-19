@@ -10,4 +10,5 @@ public interface IAnimeManagerService {
     public void actualizarAnime(Anime nuevo, Anime viejo);
     public void eliminarAnime(Anime a);
     public Catalogo getCatalogo();
+    public void guardarCambios();
 }

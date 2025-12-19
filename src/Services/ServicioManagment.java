@@ -47,6 +47,13 @@ public class ServicioManagment implements IAnimeManagerService {
         return catalogo;
     }
 
+    @Override
+    public void guardarCambios() {
+        if (catalogo != null) {
+            repositorio.actualizarCatalogo(catalogo);
+        }
+    }
+
     private void garantizarCatalogo() {
         if (catalogo == null) {
             catalogo = repositorio.cargarCatalogo();

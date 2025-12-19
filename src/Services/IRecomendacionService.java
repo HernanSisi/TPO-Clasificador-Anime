@@ -6,5 +6,5 @@ import Model.ListaPersonalizada;
 import java.util.ArrayList;
 
 public interface IRecomendacionService {
-    public ListaPersonalizada generarRecomendaciones(String criterio);
+    public ListaPersonalizada generarRecomendaciones(String criterio, ArrayList<Anime> animes);
 }

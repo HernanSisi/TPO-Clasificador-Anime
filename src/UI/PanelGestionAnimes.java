@@ -267,7 +267,7 @@ public class PanelGestionAnimes extends JPanel {
                 JOptionPane.showMessageDialog(dialog, "El título es obligatorio.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (txtTitulo.getText().trim().length() >= 2) {
+            if (txtTitulo.getText().trim().length() < 2) {
                 JOptionPane.showMessageDialog(dialog, "El título debe tener al menos 2 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }

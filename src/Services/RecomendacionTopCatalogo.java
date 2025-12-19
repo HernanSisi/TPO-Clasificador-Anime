@@ -5,6 +5,7 @@ import Model.ListaPersonalizada;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class RecomendacionTopCatalogo implements IAlgoritmoRecomendacion {
@@ -16,22 +17,20 @@ public class RecomendacionTopCatalogo implements IAlgoritmoRecomendacion {
 
     @Override
     public ListaPersonalizada crumpleCriterio(ArrayList<Anime> animes) {
-        String nombreLista = "Top " + cantidad + " Global del Catálogo";
-        ListaPersonalizada lista = new ListaPersonalizada(nombreLista);
+        ListaPersonalizada lista = new ListaPersonalizada("Top " + cantidad + " Mejores Animes");
 
-        if (animes == null || animes.isEmpty()) {
-            return lista;
+        if (animes != null && !animes.isEmpty()) {
+            List<Anime> topAnimes = animes.stream()
+                    // Ordenar por calificacion (Descendente)
+                    .sorted(Comparator.comparingInt(Anime::getCalificacionDelUsuario).reversed())
+                    // Limitar a la cantidad solicitada
+                    .limit(this.cantidad)
+                    .collect(Collectors.toList());
+
+            for (Anime a : topAnimes) {
+                lista.agregarAnime(a);
+            }
         }
-        // ordenados y limitamos
-        java.util.List<Anime> resultado = animes.stream()
-                .sorted(Comparator.comparingInt(Anime::getCalificacionDelUsuario).reversed())
-                .limit(this.cantidad)
-                .collect(Collectors.toList());
-
-        for (Anime a : resultado) {
-            lista.agregarAnime(a);
-        }
-
         return lista;
     }
 }
