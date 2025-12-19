@@ -57,8 +57,7 @@ public class MainFrame extends JFrame {
         JTabbedPane tabbedPane = new JTabbedPane();
 
         // Pestaña 1: Mis Animes (Gestión)
-        JPanel panelGestion = new JPanel();
-        panelGestion.add(new JLabel("Aquí iría la tabla de animes y botones de gestión (Agregar, Editar, Borrar)"));
+        PanelGestionAnimes panelGestion = new PanelGestionAnimes(this.servicioManagement);
         tabbedPane.addTab("Mis Animes", panelGestion);
 
         // Pestaña 2: Búsqueda y Filtros

@@ -98,7 +98,6 @@ public class VentanaInicio extends JFrame {
 
             JButton botonNuevo = botonTemplatePrincipal.getBoton("Nuevo Catalogo");
 
-            // LÓGICA DE LA NOTA: Crear catálogo, guardar y abrir MainFrame
             botonNuevo.addActionListener(e -> {
                 if (validarInput(txtInput, lblError)) {
                     String nombre = txtInput.getText();

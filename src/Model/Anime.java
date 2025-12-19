@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.io.Serializable;
-public abstract class Anime {
+public abstract class Anime implements  Serializable {
     private String titulo;
     private int anhoDeLanzamiento;
     private int calificacionDelUsuario;
