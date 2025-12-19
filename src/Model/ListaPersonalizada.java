@@ -1,0 +1,39 @@
+package Model;
+
+import java.util.ArrayList;
+
+public class ListaPersonalizada {
+    private String nombre;
+    private ArrayList<Anime> animes;
+
+    public ListaPersonalizada(String nombre) {
+        this.nombre = nombre;
+        this.animes = new ArrayList<>();
+    }
+    public void agregarAnime(Anime a){
+        animes.add(a);
+    }
+    public Anime getAnime(int i){
+        return animes.get(i);
+    }
+    public ArrayList<Anime> getAnime(){
+        return animes;
+    }
+    public int getCantidadDeAnimes(){
+        return animes.size();
+    }
+    public void removeAnime(Anime a){
+        animes.remove(a);
+    }
+    public void removeAnime(int i){
+        animes.remove(i);
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+}
