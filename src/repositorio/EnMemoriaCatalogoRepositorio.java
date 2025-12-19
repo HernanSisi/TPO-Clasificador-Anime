@@ -48,7 +48,6 @@ public class EnMemoriaCatalogoRepositorio implements ICatalogoRepositorio {
     public Catalogo cargarCatalogo() {
         File file = new File(this.ruta);
 
-        // Si el archivo no existe, retornamos null o un catálogo vacío según prefieras
         if (!file.exists()) {
             return null;
         }
@@ -66,7 +65,11 @@ public class EnMemoriaCatalogoRepositorio implements ICatalogoRepositorio {
 
     @Override
     public void actualizarCatalogo(Catalogo catalogo) {
-        // En persistencia de archivos simple, actualizar es lo mismo que sobrescribir el archivo
         guardarCatalogo(catalogo);
+    }
+
+    public boolean existeCatalogo() {
+        File file = new File(this.ruta);
+        return file.exists();
     }
 }
