@@ -40,7 +40,7 @@ public class MainFrame extends JFrame {
         // Inicializamos los otros servicios
         this.busqueda = new ServicioFiltro(this.servicioManagement);
         this.estadisticas = new ServicioEstadistica();
-        this.recomendacion = new ServicioRecomendacion();
+        this.recomendacion = new ServicioRecomendacion(this.servicioManagement);
     }
 
     private void inicializarComponentes() {
