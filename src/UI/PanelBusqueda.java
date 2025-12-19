@@ -182,7 +182,7 @@ public class PanelBusqueda extends JPanel {
         btnAplicar.addActionListener(e -> {
             int inicio = (int) spinInicio.getValue();
             int fin = (int) spinFin.getValue();
-            if (inicio >= fin) {
+            if (inicio > fin) {
                 JOptionPane.showMessageDialog(dialog,
                         "El año de inicio debe ser menor al año de fin.",
                         "Error en Años", JOptionPane.ERROR_MESSAGE);
