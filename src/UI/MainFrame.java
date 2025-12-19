@@ -38,7 +38,7 @@ public class MainFrame extends JFrame {
         // Inicializamos el servicio de manejo de archivos principal
         this.servicioManagement = new ServicioManagment(this.repositorio);
         // Inicializamos los otros servicios
-        this.busqueda = new ServicioFiltro();
+        this.busqueda = new ServicioFiltro(this.servicioManagement);
         this.estadisticas = new ServicioEstadistica();
         this.recomendacion = new ServicioRecomendacion();
     }
@@ -61,8 +61,7 @@ public class MainFrame extends JFrame {
         tabbedPane.addTab("Mis Animes", panelGestion);
 
         // Pestaña 2: Búsqueda y Filtros
-        JPanel panelBusqueda = new JPanel();
-        panelBusqueda.add(new JLabel("Aquí irían los filtros y resultados de búsqueda"));
+        PanelBusqueda panelBusqueda = new PanelBusqueda(this.busqueda, this.servicioManagement);
         tabbedPane.addTab("Buscar", panelBusqueda);
 
         // Pestaña 3: Estadísticas

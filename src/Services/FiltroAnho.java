@@ -32,7 +32,7 @@ public class FiltroAnho implements IFiltroCriterio {
             int anhoInicio = Integer.parseInt(partes[0].trim());
             int anhoFin = Integer.parseInt(partes[1].trim());
 
-            if (anhoInicio <= anhoFin) {
+            if (anhoInicio >= anhoFin) {
                 throw new IllegalArgumentException("El año de inicio debe ser menor o igual al año de fin.");
             }
 
