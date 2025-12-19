@@ -16,8 +16,8 @@ public class MainFrame {
     public static void main(String[] args) {
         String ruta = System.getProperty("user.home") + File.separator+"Documents" + File.separator + "AplicacionCatalogoAnimes" + File.separator + "catalogo.anime";
         EnMemoriaCatalogoRepositorio catalogoRepositorio = new EnMemoriaCatalogoRepositorio(ruta);
+
         new VentanaInicio(catalogoRepositorio);
-        System.out.println(catalogoRepositorio.existeCatalogo());
     }
     public void Iniciar(){}
     public void mostrarMainFrame(){}
