@@ -271,7 +271,20 @@ public class PanelGestionAnimes extends JPanel {
                 JOptionPane.showMessageDialog(dialog, "El título debe tener al menos 2 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            String tituloIngresado = txtTitulo.getText().trim();
+            if (animeEditar == null) {
+                boolean existe = servicioManagement.getCatalogo().getAnime().stream()
+                        .filter(a -> animeEditar == null || a != animeEditar)
+                        .anyMatch(a -> a.gettitulo().equalsIgnoreCase(tituloIngresado));
 
+                if (existe) {
+                    JOptionPane.showMessageDialog(dialog,
+                            "Ya existe un anime con el título: " + tituloIngresado,
+                            "Error de Duplicado",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
             //VALIDACION DE LOS GENEROS
             ArrayList<Genero> generosSeleccionados = new ArrayList<>();
             for (JCheckBox cb : listaChecks) {

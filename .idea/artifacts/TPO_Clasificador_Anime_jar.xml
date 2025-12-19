@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TPO-Clasificador-Anime:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TPO_Clasificador_Anime_jar</output-path>
+    <root id="archive" name="TPO-Clasificador-Anime.jar">
+      <element id="module-output" name="TPO-Clasificador-Anime" />
+    </root>
+  </artifact>
+</component>

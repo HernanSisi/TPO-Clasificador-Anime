@@ -69,7 +69,7 @@ public class PanelListasPersonalizada extends JPanel {
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
 
         JButton btnCrear = estiloBotonGeneral.getBoton("Crear Nueva Lista");
-        JButton btnRecomendar = estiloBotonGeneral.getBoton("Generar Recomendación");
+        JButton btnRecomendar = estiloBotonGeneral.getBoton("Generar Recomendacion");
         JButton btnEliminar = estiloBotonAccion.getBoton("Eliminar Lista");
         JButton btnModificar = estiloBotonAccion.getBoton("Modificar Lista");
         JButton btnVerContenido = estiloBotonAccion.getBoton("Ver Contenido");
@@ -101,12 +101,21 @@ public class PanelListasPersonalizada extends JPanel {
 
     private void crearNuevaLista() {
         String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre de la nueva lista:", "Nueva Lista", JOptionPane.QUESTION_MESSAGE);
-        if (nombre != null && !nombre.trim().isEmpty()) {
-            ListaPersonalizada nueva = new ListaPersonalizada(nombre.trim());
-            managementService.getCatalogo().addListaPersonalizada(nueva);
-            managementService.guardarCambios();
-            cargarDatosTabla();
+        if (nombre == null) {
+            return;
         }
+        //se verifica que el nombre no debe estar vacio ni tener solo espacios.
+        if (nombre.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "El nombre de la lista no puede estar vacio.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ListaPersonalizada nueva = new ListaPersonalizada(nombre.trim());
+        managementService.getCatalogo().addListaPersonalizada(nueva);
+        managementService.guardarCambios();
+        cargarDatosTabla();
     }
 
     private void eliminarListaSeleccionada() {
@@ -127,7 +136,7 @@ public class PanelListasPersonalizada extends JPanel {
 
     // --- LOGICA MODIFICADA PARA CONSTRUIR EL STRING DE CRITERIO ---
     private void abrirDialogoRecomendacion() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Generar Recomendación", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Generar Recomendacion", true);
         dialog.setSize(400, 300);
         dialog.setLayout(new GridBagLayout());
         dialog.setLocationRelativeTo(this);
@@ -136,28 +145,28 @@ public class PanelListasPersonalizada extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Selección de Tipo
+        // Seleccion de Tipo
         gbc.gridx = 0; gbc.gridy = 0;
-        dialog.add(new JLabel("Tipo de Recomendación:"), gbc);
-        String[] criterios = {"Top Catalogo", "Por Género"};
+        dialog.add(new JLabel("Tipo de Recomendacion:"), gbc);
+        String[] criterios = {"Top Catalogo", "Por Genero"};
         JComboBox<String> cmbCriterio = new JComboBox<>(criterios);
         gbc.gridx = 1;
         dialog.add(cmbCriterio, gbc);
 
-        // Selección de Género
+        // Seleccion de Genero
         gbc.gridx = 0; gbc.gridy = 1;
-        dialog.add(new JLabel("Género:"), gbc);
+        dialog.add(new JLabel("Genero:"), gbc);
         JComboBox<Genero> cmbGenero = new JComboBox<>(Genero.values());
         cmbGenero.setEnabled(false);
         gbc.gridx = 1;
         dialog.add(cmbGenero, gbc);
 
         cmbCriterio.addActionListener(e -> {
-            boolean esPorGenero = "Por Género".equals(cmbCriterio.getSelectedItem());
+            boolean esPorGenero = "Por Genero".equals(cmbCriterio.getSelectedItem());
             cmbGenero.setEnabled(esPorGenero);
         });
 
-        // Selección de Cantidad
+        // Seleccion de Cantidad
         gbc.gridx = 0; gbc.gridy = 2;
         dialog.add(new JLabel("Cantidad de Animes:"), gbc);
         JSpinner spinCantidad = new JSpinner(new SpinnerNumberModel(5, 1, 50, 1));
@@ -176,11 +185,11 @@ public class PanelListasPersonalizada extends JPanel {
                 return;
             }
 
-            // Construcción del String Criterio
+            // Construccion del String Criterio
             String tipoSeleccionado = (String) cmbCriterio.getSelectedItem();
             StringBuilder criterioString = new StringBuilder();
 
-            if ("Por Género".equals(tipoSeleccionado)) {
+            if ("Por Genero".equals(tipoSeleccionado)) {
                 Genero generoSeleccionado = (Genero) cmbGenero.getSelectedItem();
                 // Construimos "POR_GENERO:SHONEN:5"
                 criterioString.append("POR_GENERO:")
@@ -213,7 +222,6 @@ public class PanelListasPersonalizada extends JPanel {
         dialog.setVisible(true);
     }
 
-    // ... (El resto de métodos: abrirDialogoModificar y la clase DialogoDetalleLista se mantienen iguales)
     private void abrirDialogoModificar(boolean esModificacion) {
         int fila = tablaListas.getSelectedRow();
         if (fila == -1) {
@@ -248,7 +256,11 @@ public class PanelListasPersonalizada extends JPanel {
                 JButton btnRenombrar = new JButton("Renombrar");
                 btnRenombrar.addActionListener(e -> {
                     String nuevoNombre = txtNombreLista.getText().trim();
-                    if (!nuevoNombre.isEmpty()) {
+                    if (nuevoNombre.isEmpty()) {
+                        JOptionPane.showMessageDialog(this,
+                                "El nombre no puede estar vacío.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
                         lista.setNombre(nuevoNombre);
                         managementService.guardarCambios();
                         cargarDatosTabla();
@@ -259,7 +271,7 @@ public class PanelListasPersonalizada extends JPanel {
             }
             add(panelNombre, BorderLayout.NORTH);
 
-            String[] cols = {"Título", "Año", "Estudio", "Géneros", "Estado", "Calif.", "Detalle"};
+            String[] cols = {"Titulo", "Año", "Estudio", "Generos", "Estado", "Calif.", "Detalle"};
             modeloAnimesLista = new DefaultTableModel(cols, 0) {
                 public boolean isCellEditable(int row, int col) { return false; }
             };
@@ -273,7 +285,7 @@ public class PanelListasPersonalizada extends JPanel {
             if (editable) {
                 JPanel panelAcciones = new JPanel(new FlowLayout());
                 Boton estiloBtn = new Boton(35, 180, Color.LIGHT_GRAY, new Font("Arial", Font.BOLD, 12), Color.GRAY);
-                JButton btnAgregar = estiloBtn.getBoton("Agregar del Catálogo");
+                JButton btnAgregar = estiloBtn.getBoton("Agregar del Catalogo");
                 JButton btnQuitar = estiloBtn.getBoton("Quitar de la Lista");
                 btnQuitar.addActionListener(e -> quitarAnimeDeLista());
                 btnAgregar.addActionListener(e -> agregarAnimeDelCatalogo());
@@ -302,7 +314,7 @@ public class PanelListasPersonalizada extends JPanel {
             Catalogo catalogoGeneral = managementService.getCatalogo();
             ArrayList<Anime> disponibles = new ArrayList<>();
             for (Anime a : catalogoGeneral.getAnime()) if (!lista.getAnime().contains(a)) disponibles.add(a);
-            if (disponibles.isEmpty()) { JOptionPane.showMessageDialog(this, "No hay más animes para agregar."); return; }
+            if (disponibles.isEmpty()) { JOptionPane.showMessageDialog(this, "No hay mas animes para agregar."); return; }
             JComboBox<String> combo = new JComboBox<>();
             for (Anime a : disponibles) combo.addItem(a.gettitulo() + " (" + a.getAnhoDeLanzamiento() + ")");
             int result = JOptionPane.showConfirmDialog(this, combo, "Agregar Anime", JOptionPane.OK_CANCEL_OPTION);
