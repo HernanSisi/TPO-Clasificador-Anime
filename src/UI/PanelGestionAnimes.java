@@ -15,7 +15,6 @@ public class PanelGestionAnimes extends JPanel {
     private IAnimeManagerService servicioManagement;
     private JTable tablaAnimes;
     private DefaultTableModel modeloTabla;
-
     public PanelGestionAnimes(IAnimeManagerService servicioManagement) {
         this.servicioManagement = servicioManagement;
         setLayout(new BorderLayout());
@@ -236,11 +235,11 @@ public class PanelGestionAnimes extends JPanel {
         gbc.gridy++; gbc.gridx = 0; dialog.add(new JLabel("Calificación (1-5):"), gbc);
         gbc.gridx = 1; dialog.add(spinCalif, gbc);
 
-        // Categorias (Checkboxes) - Ocupa 2 filas de altura visualmente si es necesario
+        // Categorias
         gbc.gridy++; gbc.gridx = 0;
-        gbc.gridwidth = 2; // Ocupa todo el ancho
+        gbc.gridwidth = 2;
         dialog.add(scrollGeneros, gbc);
-        gbc.gridwidth = 1; // Restauramos
+        gbc.gridwidth = 1;
 
         // Tipo
         gbc.gridy++; gbc.gridx = 0; dialog.add(new JLabel("Tipo:"), gbc);
@@ -297,18 +296,7 @@ public class PanelGestionAnimes extends JPanel {
                 return;
             }
             int anhoIngresado = (int) spinAnho.getValue();
-            /*
-            //VALIDACION DEL AÑO
-            int anhoActualSistema = Year.now().getValue();
-            if (anhoIngresado > anhoActualSistema) {
-                JOptionPane.showMessageDialog(dialog, "El año no puede ser futuro.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            if (anhoIngresado < 1900) {
-                JOptionPane.showMessageDialog(dialog, "El año no puede ser anterior a 1900.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            */
+
             // Datos finales
             String titulo = txtTitulo.getText();
             Estudio estudio = (Estudio) cmbEstudio.getSelectedItem();

@@ -24,7 +24,6 @@ public abstract class Anime implements Serializable {
                  EstadoAnime estado,
                  ArrayList<Genero> generos,
                  Estudio estudio) {
-        // Usamos los setters para validar también al momento de la construcción
         settitulo(titulo);
         setAnhoDeLanzamiento(anhoDeLanzamiento);
         setCalificacionDelUsuario(calificacionDelUsuario);

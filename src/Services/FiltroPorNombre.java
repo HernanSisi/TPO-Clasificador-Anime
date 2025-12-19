@@ -13,7 +13,6 @@ public class FiltroPorNombre implements IFiltroCriterio {
     @Override
     public ArrayList<Anime> crumpleCriterio(ArrayList<Anime> animes) {
         ArrayList<Anime> animesFiltrados = new ArrayList<>();
-
         // validamos si el texto de búsqueda es nulo o vacío
         if (this.textoBusqueda == null || this.textoBusqueda.trim().isEmpty()) {
             System.err.println("El criterio de nombre está vacío.");

@@ -14,21 +14,16 @@ import java.awt.event.ComponentEvent;
 public class PanelEstadisticas extends JPanel {
 
     private IEstadisticasService estadisticasService;
-
-    // Componentes para actualizar
     private JLabel lblPromedioGlobal;
     private JLabel lblTopGeneros;
     private JTable tablaGeneros;
     private DefaultTableModel modeloTablaGeneros;
-    private JPanel panelEstados; // Para barras o etiquetas de estados
+    private JPanel panelEstados;
 
     public PanelEstadisticas(IEstadisticasService estadisticasService) {
         this.estadisticasService = estadisticasService;
         setLayout(new BorderLayout());
-
         inicializarUI();
-
-        // Listener para actualizar datos cuando la pestaña gana el foco
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
@@ -38,20 +33,20 @@ public class PanelEstadisticas extends JPanel {
     }
 
     private void inicializarUI() {
-        // --- TÍTULO ---
+        // TÍTULO
         JLabel titulo = new JLabel("Dashboard de Estadísticas");
         titulo.setFont(new Font("Arial", Font.BOLD, 22));
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
         add(titulo, BorderLayout.NORTH);
 
-        // --- CONTENIDO CENTRAL (GRIDBAG) ---
+        //CONTENIDO CENTRAL
         JPanel panelCentral = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.BOTH;
 
-        // 1. TARJETA PROMEDIO GLOBAL
+        //TARJETA PROMEDIO GLOBAL
         JPanel cardGlobal = crearTarjeta("Promedio Calificación Global");
         lblPromedioGlobal = new JLabel("-");
         lblPromedioGlobal.setFont(new Font("Arial", Font.BOLD, 36));
@@ -62,7 +57,7 @@ public class PanelEstadisticas extends JPanel {
         gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0.5; gbc.weighty = 0.2;
         panelCentral.add(cardGlobal, gbc);
 
-        // 2. TARJETA TOP GÉNEROS
+        //TARJETA TOP GÉNEROS
         JPanel cardTop = crearTarjeta("Top 3 Géneros Más Frecuentes");
         lblTopGeneros = new JLabel("-");
         lblTopGeneros.setFont(new Font("Arial", Font.ITALIC, 16));
@@ -72,7 +67,7 @@ public class PanelEstadisticas extends JPanel {
         gbc.gridx = 1; gbc.gridy = 0;
         panelCentral.add(cardTop, gbc);
 
-        // 3. TABLA DE DETALLE POR GÉNERO (Promedio y Cantidad)
+        //TABLA DE DETALLE POR GÉNERO (Promedio y Cantidad)
         JPanel cardTabla = crearTarjeta("Desglose por Género");
         String[] cols = {"Género", "Cantidad Animes", "Promedio Calif."};
         modeloTablaGeneros = new DefaultTableModel(cols, 0) {
@@ -86,7 +81,7 @@ public class PanelEstadisticas extends JPanel {
         gbc.gridx = 0; gbc.gridy = 1; gbc.gridwidth = 2; gbc.weighty = 0.5;
         panelCentral.add(cardTabla, gbc);
 
-        // 4. ESTADÍSTICAS POR ESTADO
+        //ESTADÍSTICAS POR ESTADO
         JPanel cardEstados = crearTarjeta("Cantidad por Estado");
         panelEstados = new JPanel(new GridLayout(1, 4, 10, 0)); // Una fila, 4 col
         cardEstados.add(panelEstados, BorderLayout.CENTER);
@@ -111,15 +106,15 @@ public class PanelEstadisticas extends JPanel {
     }
 
     private void cargarEstadisticas() {
-        // 1. Promedio Global
+        //Promedio Global
         String promGlobal = estadisticasService.obtenerEstadistica("GLOBAL_PROMEDIO");
         lblPromedioGlobal.setText(promGlobal);
 
-        // 2. Top Géneros
+        //Top Géneros
         String topGen = estadisticasService.obtenerEstadistica("TOP_GENEROS:3");
         lblTopGeneros.setText("<html><div style='text-align: center;'>" + topGen + "</div></html>");
 
-        // 3. Tabla Por Género
+        //Tabla Por Género
         modeloTablaGeneros.setRowCount(0);
         for (Genero g : Genero.values()) {
             String cant = estadisticasService.obtenerEstadistica("GENERO_CANTIDAD:" + g.name());
@@ -127,7 +122,7 @@ public class PanelEstadisticas extends JPanel {
             modeloTablaGeneros.addRow(new Object[]{g.name(), cant, prom});
         }
 
-        // 4. Estados (Reconstruimos los labels para actualizar valores)
+        //Estados
         panelEstados.removeAll();
         for (EstadoAnime e : EstadoAnime.values()) {
             String cant = estadisticasService.obtenerEstadistica("ESTADO_CANTIDAD:" + e.name());

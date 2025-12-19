@@ -18,8 +18,6 @@ public class PanelListasPersonalizada extends JPanel {
     private IRecomendacionService recomendacionService;
     private JTable tablaListas;
     private DefaultTableModel modeloTabla;
-
-    // Estilos
     private Boton estiloBotonAccion;
     private Boton estiloBotonGeneral;
 
@@ -43,14 +41,14 @@ public class PanelListasPersonalizada extends JPanel {
     }
 
     private void inicializarUI() {
-        // --- PANEL SUPERIOR ---
+        //PANEL SUPERIOR
         JLabel lblTitulo = new JLabel("Mis Listas Personalizadas");
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 20));
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitulo.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
         add(lblTitulo, BorderLayout.NORTH);
 
-        // --- PANEL CENTRAL ---
+        // PANEL CENTRAL
         String[] columnas = {"Nombre de la Lista", "Cantidad de Animes"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
             @Override
@@ -65,7 +63,7 @@ public class PanelListasPersonalizada extends JPanel {
         JScrollPane scrollPane = new JScrollPane(tablaListas);
         add(scrollPane, BorderLayout.CENTER);
 
-        // --- PANEL INFERIOR ---
+        // PANEL INFERIOR
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
 
         JButton btnCrear = estiloBotonGeneral.getBoton("Crear Nueva Lista");
@@ -134,7 +132,7 @@ public class PanelListasPersonalizada extends JPanel {
         }
     }
 
-    // --- LOGICA MODIFICADA PARA CONSTRUIR EL STRING DE CRITERIO ---
+    // LOGICA MODIFICADA PARA CONSTRUIR EL STRING DE CRITERIO
     private void abrirDialogoRecomendacion() {
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Generar Recomendacion", true);
         dialog.setSize(400, 300);
@@ -191,13 +189,11 @@ public class PanelListasPersonalizada extends JPanel {
 
             if ("Por Genero".equals(tipoSeleccionado)) {
                 Genero generoSeleccionado = (Genero) cmbGenero.getSelectedItem();
-                // Construimos "POR_GENERO:SHONEN:5"
                 criterioString.append("POR_GENERO:")
                         .append(generoSeleccionado.name())
                         .append(":")
                         .append(cantidad);
             } else {
-                // Construimos "TOP_CATALOGO:5"
                 criterioString.append("TOP_CATALOGO:")
                         .append(cantidad);
             }

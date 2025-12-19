@@ -18,14 +18,12 @@ public class PanelBusqueda extends JPanel {
     private IAnimeManagerService managementService;
     private ArrayList<Anime> animesEncontrados;
 
-    // Componentes UI
     private JTextField txtBusquedaNombre;
     private JTable tablaResultados;
     private DefaultTableModel modeloTabla;
     private JButton btnGuardar;
     private JLabel lblFiltrosActivos;
 
-    // Variables para filtros activos
     private String filtroRangoAnios = "";
     private List<EstadoAnime> filtrosEstados = new ArrayList<>();
 
@@ -127,7 +125,7 @@ public class PanelBusqueda extends JPanel {
 
     private void abrirVentanaFiltros() {
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Configurar Filtros Avanzados", true);
-        dialog.setSize(400, 380); // Un poco más alto para que entren bien los botones
+        dialog.setSize(400, 380);
         dialog.setLayout(new GridBagLayout());
         dialog.setLocationRelativeTo(this);
         GridBagConstraints gbc = new GridBagConstraints();

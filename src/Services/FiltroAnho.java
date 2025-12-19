@@ -28,7 +28,6 @@ public class FiltroAnho implements IFiltroCriterio {
                 throw new IllegalArgumentException("El formato del año debe ser 'AAAA-AAAA'.");
             }
 
-            // Parseamos los años quitando espacios en blanco
             int anhoInicio = Integer.parseInt(partes[0].trim());
             int anhoFin = Integer.parseInt(partes[1].trim());
 

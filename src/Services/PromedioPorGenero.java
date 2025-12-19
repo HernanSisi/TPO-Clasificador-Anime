@@ -6,11 +6,9 @@ import java.util.ArrayList;
 
 public class PromedioPorGenero implements IEstrategiaEstadistica {
     private Genero generoObjetivo;
-
     public PromedioPorGenero(Genero genero) {
         this.generoObjetivo = genero;
     }
-
     @Override
     public String crumpleCriterio(ArrayList<Anime> animes) {
         if (animes == null || animes.isEmpty()) return "0.00";

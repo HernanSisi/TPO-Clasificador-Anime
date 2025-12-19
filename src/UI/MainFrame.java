@@ -27,8 +27,6 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
-
-        // Inicializar la lógica de negocio y la UI
         Iniciar();
         inicializarComponentes();
     }
@@ -52,11 +50,9 @@ public class MainFrame extends JFrame {
         titulo.setFont(new Font("Arial", Font.BOLD, 24));
         panelSuperior.add(titulo);
         add(panelSuperior, BorderLayout.NORTH);
-
-        //creamos pestañas para las diferentes funcionalidades
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        // Pestaña 1: Mis Animes (Gestión)
+        // Pestaña 1: Mis Animes
         PanelGestionAnimes panelGestion = new PanelGestionAnimes(this.servicioManagement);
         tabbedPane.addTab("Mis Animes", panelGestion);
 
@@ -68,7 +64,7 @@ public class MainFrame extends JFrame {
         PanelEstadisticas panelEstadisticas = new PanelEstadisticas(this.estadisticas);
         tabbedPane.addTab("Estadísticas", panelEstadisticas);
 
-        // Pestaña 4: Recomendaciones
+        // Pestaña 4: Listas Personalizadas
         PanelListasPersonalizada panelListas = new PanelListasPersonalizada(servicioManagement,recomendacion);
         tabbedPane.addTab("Listas Personalizadas", panelListas);
 

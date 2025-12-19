@@ -16,10 +16,8 @@ public class ServicioEstadistica implements IEstadisticasService {
     @Override
     public String obtenerEstadistica(String criterio) {
         if (animeManager == null) return "Error: Servicio no inicializado";
-
         ArrayList<Anime> animes = animeManager.getCatalogo().getAnime();
         IEstrategiaEstadistica estrategia = null;
-
         try {
             String[] partes = criterio.split(":");
             String tipo = partes[0].toUpperCase();
