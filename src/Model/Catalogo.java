@@ -1,11 +1,14 @@
 package Model;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Catalogo {
+public class Catalogo implements Serializable{
+    private static final long serialVersionUID = 1L;
     private ArrayList<Anime> animes;
     private String nombre;
     private ArrayList<ListaPersonalizada> listasPersonalizadas;
+
     public Catalogo(String nombre) {
         this.nombre = nombre;
         this.animes = new ArrayList<>();

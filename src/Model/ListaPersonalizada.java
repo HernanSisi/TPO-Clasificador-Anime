@@ -1,8 +1,10 @@
 package Model;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 public class ListaPersonalizada {
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private ArrayList<Anime> animes;
 

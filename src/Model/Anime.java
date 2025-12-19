@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
+import java.io.Serializable;
 public abstract class Anime {
     private String titulo;
     private int anhoDeLanzamiento;
@@ -10,6 +10,7 @@ public abstract class Anime {
     private EstadoAnime estado;
     private ArrayList<Genero> generos;
     private Estudio estudio;
+    private static final long serialVersionUID = 1L;
 
     /**
      * <b><span style="color: #000000; background-color: #FFFACD;"> METODOS </span></b><br><br>
