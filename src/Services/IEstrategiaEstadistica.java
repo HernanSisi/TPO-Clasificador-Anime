@@ -5,5 +5,5 @@ import Model.Anime;
 import java.util.ArrayList;
 
 public interface IEstrategiaEstadistica {
-    public double crumpleCriterio(ArrayList<Anime> animes);
+    public String crumpleCriterio(ArrayList<Anime> animes);
 }

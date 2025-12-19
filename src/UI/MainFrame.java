@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
         this.servicioManagement = new ServicioManagment(this.repositorio);
         // Inicializamos los otros servicios
         this.busqueda = new ServicioFiltro(this.servicioManagement);
-        this.estadisticas = new ServicioEstadistica();
+        this.estadisticas = new ServicioEstadistica(this.servicioManagement);
         this.recomendacion = new ServicioRecomendacion();
     }
 
@@ -65,8 +65,7 @@ public class MainFrame extends JFrame {
         tabbedPane.addTab("Buscar", panelBusqueda);
 
         // Pestaña 3: Estadísticas
-        JPanel panelEstadisticas = new JPanel();
-        panelEstadisticas.add(new JLabel("Aquí se mostrarían los gráficos o datos estadísticos"));
+        PanelEstadisticas panelEstadisticas = new PanelEstadisticas(this.estadisticas);
         tabbedPane.addTab("Estadísticas", panelEstadisticas);
 
         // Pestaña 4: Recomendaciones
